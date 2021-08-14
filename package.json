@@ -1,0 +1,11 @@
+{
+  "name": "my-wave-portal",
+  "version": "1.0.0",
+  "description": "it's a wave portal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rohaan",
+  "license": "ISC"
+}
