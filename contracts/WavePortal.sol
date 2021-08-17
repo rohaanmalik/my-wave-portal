@@ -4,9 +4,18 @@ import "hardhat/console.sol";
 
 contract WavePortal{
     uint totalWaves;
+    mapping (address => uint) waveMap;
 
     constructor(){
         console.log("I am a smart contract");
+    }
+
+    function addToMap(address wallet) public {
+       waveMap[wallet] += 1;
+    }
+
+    function getWavesWallet(address wallet) view public returns (uint) {
+        return waveMap[wallet];
     }
 
     function wave() public {
