@@ -4,7 +4,7 @@ import "hardhat/console.sol";
 
 contract WavePortal{
     uint totalWaves;
-    mapping (address => uint) waveMap;
+    mapping (address => uint) public waveMap;
 
     constructor(){
         console.log("I am a smart contract");
@@ -14,13 +14,16 @@ contract WavePortal{
        waveMap[wallet] += 1;
     }
 
-    function getWavesWallet(address wallet) view public returns (uint) {
-        return waveMap[wallet];
+    function getWavesWallet(address _add) view public returns (uint) {
+        uint waves = waveMap[_add];
+        console.log("Wallet %s has %s number of wave", _add, waves);
+        return waveMap[_add];
     }
 
     function wave() public {
-       totalWaves += 1;
-       console.log("%s is waved", msg.sender);
+        totalWaves += 1;
+        console.log("%s is waved", msg.sender);
+        addToMap(msg.sender);
     }
 
     function getTotalWaves() view public returns (uint) {
