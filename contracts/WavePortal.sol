@@ -18,6 +18,14 @@ contract WavePortal{
         console.log("I am a smart contract");
     }
 
+    function wave(string memory _message) public {
+        totalWaves += 1;
+        console.log("%s is waved", msg.sender);
+        Wave memory _wave = Wave(msg.sender, _message, block.timestamp);
+        addToMap(msg.sender, _wave);
+        allWaves.push(_wave);
+    }
+
     function addToMap(address wallet, Wave memory _wave) public {
        waveMap[wallet].push(_wave);
     }
@@ -26,14 +34,6 @@ contract WavePortal{
         uint wavesPerAddress = waveMap[_add].length;
         console.log("Wallet %s has %s number of wave", _add, wavesPerAddress);
         return waveMap[_add];
-    }
-
-    function wave(string memory _message) public {
-        totalWaves += 1;
-        console.log("%s is waved", msg.sender);
-        Wave memory _wave = Wave(msg.sender, _message, block.timestamp);
-        addToMap(msg.sender, _wave);
-        allWaves.push(_wave);
     }
 
     function getTotalWaves() view public returns (uint) {
