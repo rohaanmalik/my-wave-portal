@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 
 contract WavePortal{
-
+    event NewWave(address indexed from, string message,  uint timestamp);
     struct Wave {
         address _address;
         string message;
@@ -14,7 +14,7 @@ contract WavePortal{
     mapping (address => Wave[]) public waveMap;
     Wave[] allWaves;
 
-    constructor(){
+    constructor() payable{
         console.log("I am a smart contract");
     }
 
@@ -22,8 +22,14 @@ contract WavePortal{
         totalWaves += 1;
         console.log("%s is waved", msg.sender);
         Wave memory _wave = Wave(msg.sender, _message, block.timestamp);
+        emit NewWave(msg.sender, _message, block.timestamp);
         addToMap(msg.sender, _wave);
         allWaves.push(_wave);
+
+        uint prizeAmount = 0.0001 ether;
+        require(prizeAmount <= address(this).balance, "Trying to withdraw more money than you have");
+        (bool success,) = (msg.sender).call{value: prizeAmount}("");
+        require(success, "Failed to withdraw money from the contract");
     }
 
     function addToMap(address wallet, Wave memory _wave) public {
