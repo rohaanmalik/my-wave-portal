@@ -22,7 +22,7 @@ contract WavePortal{
        waveMap[wallet].push(_wave);
     }
 
-    function getWavesWallet(address _add) view public returns (Wave[] memory) {
+    function getWavesPerWallet(address _add) view public returns (Wave[] memory) {
         uint wavesPerAddress = waveMap[_add].length;
         console.log("Wallet %s has %s number of wave", _add, wavesPerAddress);
         return waveMap[_add];
