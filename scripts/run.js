@@ -9,17 +9,20 @@ async function main() {
     let waitCount;
     waitCount = await waveContract.getTotalWaves();
 
-    let waveTxn = await waveContract.connect(randoPerson).wave(); // a random person can wave
+    let waveTxn = await waveContract.connect(randoPerson).wave("Hey, this is Rohaan"); // a random person can wave
     await waveTxn.wait(); 
 
     waitCount = await waveContract.getTotalWaves();
+    let allWaves = await waveContract.getAllWaves();
+    console.log(allWaves);
+ 
 
-    waveTxn = await waveContract.connect(randoPerson).wave(); // a random person can wave
-    await waveTxn.wait(); 
+    // waveTxn = await waveContract.connect(randoPerson).wave(); // a random person can wave
+    // await waveTxn.wait(); 
 
-    let wavesForRando;
-    wavesForRando = await waveContract.getWavesWallet(randoPerson.address);
-    await wavesForRando.wait();
+    // let wavesForRando;
+    // wavesForRando = await waveContract.getWavesWallet(randoPerson.address);
+    // await wavesForRando.wait();
 }
 
 main()
