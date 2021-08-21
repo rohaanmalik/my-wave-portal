@@ -26,7 +26,7 @@ contract WavePortal{
         addToMap(msg.sender, _wave);
         allWaves.push(_wave);
 
-        uint prizeAmount = 0.0001 ether;
+        uint prizeAmount = 0.00001 ether;
         require(prizeAmount <= address(this).balance, "Trying to withdraw more money than you have");
         (bool success,) = (msg.sender).call{value: prizeAmount}("");
         require(success, "Failed to withdraw money from the contract");
